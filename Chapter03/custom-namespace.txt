@@ -1,0 +1,107 @@
+input:
+kubectl create -f Chapter03/custom-namespase.yaml
+
+output:
+namespace/custom-namespace created
+
+input:
+kubectl create -f Chapter03/kubia-manual.yaml -n custom-namespace
+
+output:
+pod/kubia-manual created
+
+input:
+kubectl get po --namespace=custom-namespace
+
+output:
+NAME           READY   STATUS    RESTARTS   AGE
+kubia-manual   1/1     Running   0          21m
+
+input:
+kubectl delete ns custom-namespace
+
+output:
+namespace "custom-namespace" deleted
+
+input:
+kubectl get ns
+
+output:
+NAME                   STATUS   AGE
+default                Active   4d23h
+kube-node-lease        Active   4d23h
+kube-public            Active   4d23h
+kube-system            Active   4d23h
+kubernetes-dashboard   Active   4d23h
+
+input:
+kubectl get po
+
+output:
+NAME              READY   STATUS    RESTARTS   AGE
+kubia-9x5rg       1/1     Running   2          4d22h
+kubia-foo         1/1     Running   0          44m
+kubia-manual      1/1     Running   0          127m
+kubia-manual-v2   1/1     Running   0          97m
+kubia-s59cz       1/1     Running   2          4d22h
+kubia-xpgtd       1/1     Running   2          4d23h
+
+input:
+kubectl delete po -l creation_method=manual
+
+output:
+pod "kubia-manual" deleted
+pod "kubia-manual-v2" deleted
+
+input:
+kubectl get po
+
+output:
+NAME          READY   STATUS    RESTARTS   AGE
+kubia-9x5rg   1/1     Running   2          4d22h
+kubia-foo     1/1     Running   0          46m
+kubia-s59cz   1/1     Running   2          4d22h
+kubia-xpgtd   1/1     Running   2          4d23h
+
+input:
+kubectl delete po --all
+
+output:
+pod "kubia-9x5rg" deleted
+pod "kubia-foo" deleted
+pod "kubia-s59cz" deleted
+pod "kubia-xpgtd" deleted
+
+input:
+kubectl get pods
+
+output: (because replicationcontrolles exists)
+NAME          READY   STATUS    RESTARTS   AGE
+kubia-64c9v   1/1     Running   0          51s
+kubia-ntkc2   1/1     Running   0          51s
+kubia-rd5rh   1/1     Running   0          51s
+
+input:
+kubectl get rc
+
+output:
+NAME    DESIRED   CURRENT   READY   AGE
+kubia   3         3         3       4d23h
+
+input:
+kubectl delete all --all
+
+output:
+pod "kubia-64c9v" deleted
+pod "kubia-ntkc2" deleted
+pod "kubia-rd5rh" deleted
+replicationcontroller "kubia" deleted
+service "kubernetes" deleted
+service "kubia-http" deleted
+
+input:
+kubectl get all -o wide
+
+output: (kubernetes service recreated automaticaly)
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   58s   <none>

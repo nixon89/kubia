@@ -1,0 +1,49 @@
+input:
+kubectl annotate pod kubia-manual example.com/someannotation="kubernetes rulezzz"
+
+output:
+pod/kubia-manual annotated
+
+input:
+kubectl describe pod kubia-manual
+
+output:
+Name:         kubia-manual
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.99.100
+Start Time:   Sun, 15 Dec 2019 22:31:18 +0500
+Labels:       creation_method=manual
+Annotations:  example.com/someannotation: kubernetes rulezzz                <<<<<<<<ADDED ANNOTATION
+Status:       Running
+IP:           172.17.0.14
+Containers:
+  kubia:
+    Container ID:   docker://8691e4e009e1e53080c7b42e9f43d0c51c68e194928efb7e20a6e60370e707a5
+    Image:          nixon89/kubia
+    Image ID:       docker-pullable://nixon89/kubia@sha256:a03fca6989797772000637acc95fa97a22c6fab2c134cf8151ae1e8cc71bd075
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Sun, 15 Dec 2019 22:31:21 +0500
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-kr5f8 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  default-token-kr5f8:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-kr5f8
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:          <none>
