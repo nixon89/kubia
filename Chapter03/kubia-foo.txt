@@ -1,0 +1,17 @@
+input:
+kubectl create -f Chapter03/kubia-foo.yaml
+
+output:
+pod/kubia-foo created
+
+input:
+kubectl get pod
+
+output:
+NAME              READY   STATUS    RESTARTS   AGE
+kubia-9x5rg       1/1     Running   2          4d22h
+kubia-foo         1/1     Running   0          49s
+kubia-manual      1/1     Running   0          83m
+kubia-manual-v2   1/1     Running   0          53m
+kubia-s59cz       1/1     Running   2          4d22h
+kubia-xpgtd       1/1     Running   2          4d22h
