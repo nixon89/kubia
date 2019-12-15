@@ -78,3 +78,22 @@ kubia-9x5rg   1/1     Running   2          4d21h
 kubia-s59cz   1/1     Running   2          4d21h
 kubia-xpgtd   1/1     Running   2          4d21h
 
+input:
+kubectl get nodes -L kubernetes.io/hostname
+
+output:
+NAME       STATUS   ROLES    AGE     VERSION   HOSTNAME
+minikube   Ready    master   4d22h   v1.16.2   minikube
+
+input:
+kubectl label node minikube foo=bar
+
+output:
+node/minikube labeled
+
+input:
+kubectl get nodes -L foo
+
+output:
+NAME       STATUS   ROLES    AGE     VERSION   FOO
+minikube   Ready    master   4d22h   v1.16.2   bar
