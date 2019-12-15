@@ -1,0 +1,80 @@
+input:
+kubectl create -f Chapter03/kubia-manual-with-labels.yaml
+kubectl get po --show-labels
+
+output:
+NAME              READY   STATUS    RESTARTS   AGE     LABELS
+kubia-9x5rg       1/1     Running   2          4d21h   run=kubia
+kubia-manual      1/1     Running   0          30m     <none>
+kubia-manual-v2   1/1     Running   0          59s     creation_method=manual,env=prod
+kubia-s59cz       1/1     Running   2          4d21h   run=kubia
+kubia-xpgtd       1/1     Running   2          4d21h   run=kubia
+
+input:
+kubectl get po -L creation_method,env
+
+output:
+NAME              READY   STATUS    RESTARTS   AGE     CREATION_METHOD   ENV
+kubia-9x5rg       1/1     Running   2          4d21h
+kubia-manual      1/1     Running   0          31m
+kubia-manual-v2   1/1     Running   0          2m7s    manual            prod
+kubia-s59cz       1/1     Running   2          4d21h
+kubia-xpgtd       1/1     Running   2          4d21h
+
+input:
+kubectl label po kubia-manual creation_method=manual
+
+output:
+pod/kubia-manual labeled
+
+input:
+kubectl label po kubia-manual-v2 env=debug --overwrite
+
+output:
+pod/kubia-manual-v2 labeled
+
+input:
+kubectl get po -L creation_method,env
+
+output:
+NAME              READY   STATUS    RESTARTS   AGE     CREATION_METHOD   ENV
+kubia-9x5rg       1/1     Running   2          4d21h
+kubia-manual      1/1     Running   0          36m     manual
+kubia-manual-v2   1/1     Running   0          6m31s   manual            debug
+kubia-s59cz       1/1     Running   2          4d21h
+kubia-xpgtd       1/1     Running   2          4d21h
+
+input:
+kubectl get po -l creation_method=manual
+
+output:
+NAME              READY   STATUS    RESTARTS   AGE
+kubia-manual      1/1     Running   0          38m
+kubia-manual-v2   1/1     Running   0          8m55s
+
+input:
+kubectl get po -l env
+
+output:
+NAME              READY   STATUS    RESTARTS   AGE
+kubia-manual-v2   1/1     Running   0          9m31s
+
+input:
+kubectl get po -l '!env'
+
+output:
+NAME           READY   STATUS    RESTARTS   AGE
+kubia-9x5rg    1/1     Running   2          4d21h
+kubia-manual   1/1     Running   0          39m
+kubia-s59cz    1/1     Running   2          4d21h
+kubia-xpgtd    1/1     Running   2          4d21h
+
+input:
+kubectl get po -l creation_method!=manual
+
+output:
+NAME          READY   STATUS    RESTARTS   AGE
+kubia-9x5rg   1/1     Running   2          4d21h
+kubia-s59cz   1/1     Running   2          4d21h
+kubia-xpgtd   1/1     Running   2          4d21h
+
