@@ -1,0 +1,3 @@
+input:
+docker build -t nixon89/kubia-unhealthy .
+docker push nixon89/kubia-unhealthy

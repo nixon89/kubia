@@ -1,0 +1,19 @@
+input:
+kubectl apply -f Chapter04/kubia-liveness-probe.yaml
+
+output:
+pod/kubia-liveness created
+
+input:
+kubectl get po kubia-liveness
+
+output:
+NAME             READY   STATUS    RESTARTS   AGE
+kubia-liveness   1/1     Running   0          50s
+
+input:
+kubectl get po kubia-liveness
+
+output: (restarts grow up after fail liveness probe)
+NAME             READY   STATUS    RESTARTS   AGE
+kubia-liveness   1/1     Running   1          2m
