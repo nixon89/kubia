@@ -1,0 +1,34 @@
+input:
+kubectl apply -f kubia-rc.yaml
+
+output:
+replicationcontroller/kubia created
+
+input:
+kubectl get all
+
+output:
+NAME              READY   STATUS    RESTARTS   AGE
+pod/kubia-knq9z   1/1     Running   0          12s
+pod/kubia-m8tsk   1/1     Running   0          12s
+pod/kubia-w58bc   1/1     Running   0          12s
+NAME                          DESIRED   CURRENT   READY   AGE
+replicationcontroller/kubia   3         3         3       12s
+
+input:
+kubectl delete pod kubia-knq9z
+
+output:
+pod "kubia-knq9z" deleted
+
+input:
+kubectl get pods
+
+output:
+NAME          READY   STATUS        RESTARTS   AGE
+kubia-7dzgq   1/1     Running       0          9s
+kubia-knq9z   1/1     Terminating   0          2m41s
+kubia-m8tsk   1/1     Running       0          2m41s
+kubia-w58bc   1/1     Running       0          2m41s
+
+input:
