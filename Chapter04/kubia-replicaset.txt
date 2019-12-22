@@ -1,0 +1,7 @@
+input:
+kubectl apply -f kubia-replicaset.yaml
+
+output:
+error: unable to recognize "kubia-replicaset.yaml": no matches for kind "ReplicaSet" in version "apps/v1beta2"
+
+
