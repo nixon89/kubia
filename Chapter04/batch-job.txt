@@ -97,3 +97,9 @@ multi-completion-batch-job-5r5ph   0/1     Completed   0          12m
 multi-completion-batch-job-b8l4g   0/1     Completed   0          10m
 multi-completion-batch-job-q9xxh   0/1     Completed   0          8m46s
 multi-completion-batch-job-wzqtx   0/1     Completed   0          4m36s
+
+input:
+kubectl apply -f multi-completion-parallel-batch-job.yaml
+
+output:
+job.batch/multi-completion-batch-job configured
