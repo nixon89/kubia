@@ -11,3 +11,13 @@ output:
 replicaset.apps/kubia created
 
 input:
+kubectl delete rs kubia
+
+output:
+replicaset.apps "kubia" deleted
+
+input:
+kubectl apply -f kubia-replicaset-matchexpressions.yaml
+
+output:
+replicaset.apps/kubia created
