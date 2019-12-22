@@ -39,3 +39,61 @@ output:
 NAME        COMPLETIONS   DURATION   AGE
 batch-job   1/1           2m6s       7m2s
 
+input:
+kubectl apply -f multi-completion-batch-job.yaml
+
+output:
+job.batch/multi-completion-batch-job created
+
+input:
+kubectl get job
+
+output:
+NAME                         COMPLETIONS   DURATION   AGE
+batch-job                    1/1           2m6s       11m
+multi-completion-batch-job   0/5           52s        52s
+
+input:
+kubectl get po
+
+output:
+NAME                               READY   STATUS      RESTARTS   AGE
+batch-job-dq7zc                    0/1     Completed   0          12m
+multi-completion-batch-job-5r5ph   1/1     Running     0          95s
+
+input:
+kubectl get job
+
+output:
+NAME                         COMPLETIONS   DURATION   AGE
+batch-job                    1/1           2m6s       12m
+multi-completion-batch-job   1/5           2m11s      2m11s
+
+input:
+kubectl get po
+
+output:
+NAME                               READY   STATUS      RESTARTS   AGE
+batch-job-dq7zc                    0/1     Completed   0          13m
+multi-completion-batch-job-5r5ph   0/1     Completed   0          3m6s
+multi-completion-batch-job-b8l4g   1/1     Running     0          61s
+
+input:
+kubectl get job
+
+output:
+NAME                         COMPLETIONS   DURATION   AGE
+batch-job                    1/1           2m6s       23m
+multi-completion-batch-job   5/5           10m        12m
+
+input:
+kubectl get po
+
+output:
+NAME                               READY   STATUS      RESTARTS   AGE
+batch-job-dq7zc                    0/1     Completed   0          23m
+multi-completion-batch-job-5ptbc   0/1     Completed   0          6m40s
+multi-completion-batch-job-5r5ph   0/1     Completed   0          12m
+multi-completion-batch-job-b8l4g   0/1     Completed   0          10m
+multi-completion-batch-job-q9xxh   0/1     Completed   0          8m46s
+multi-completion-batch-job-wzqtx   0/1     Completed   0          4m36s
