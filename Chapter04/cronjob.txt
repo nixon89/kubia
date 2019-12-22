@@ -1,0 +1,60 @@
+input:
+kubectl apply -f cronjob.yaml
+
+output:
+cronjob.batch/batch-job-every-fifteen-minutes created
+
+input:
+kubectl get cronjobs.batch
+
+output:
+NAME                              SCHEDULE             SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+batch-job-every-fifteen-minutes   0,15,30,45 * * * *   False     0        <none>          19s
+
+input:
+kubectl get pods
+
+output:
+No resources found in default namespace.
+
+input:
+kubectl get cronjobs.batch
+
+output:
+NAME                              SCHEDULE             SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+batch-job-every-fifteen-minutes   0,15,30,45 * * * *   False     1        54s             2m49s
+
+input:    #this job created from cronjob
+kubectl get jobs.batch
+
+output:
+NAME                                         COMPLETIONS   DURATION   AGE
+batch-job-every-fifteen-minutes-1577049300   0/1           62s        62s
+
+input:
+kubectl get pods
+
+output:
+NAME                                               READY   STATUS    RESTARTS   AGE
+batch-job-every-fifteen-minutes-1577049300-mkhn7   1/1     Running   0          65s
+
+input:
+kubectl get cronjobs.batch
+
+output:
+NAME                              SCHEDULE             SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+batch-job-every-fifteen-minutes   0,15,30,45 * * * *   False     0        2m48s           4m43s
+
+input:
+kubectl get jobs.batch
+
+output:
+NAME                                         COMPLETIONS   DURATION   AGE
+batch-job-every-fifteen-minutes-1577049300   1/1           2m5s       3m7s
+
+input:
+kubectl get pods
+
+output:
+NAME                                               READY   STATUS      RESTARTS   AGE
+batch-job-every-fifteen-minutes-1577049300-mkhn7   0/1     Completed   0          4m13s
