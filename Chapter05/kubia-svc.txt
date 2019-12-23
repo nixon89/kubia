@@ -1,0 +1,15 @@
+input:
+kubectl apply -f kubia-svc.yaml
+
+output:
+service/kubia created
+
+input:
+kubectl get svc
+
+output:
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP   4d13h
+kubia        ClusterIP   10.96.151.114   <none>        80/TCP    16s
+
+input:
