@@ -55,3 +55,14 @@ root@kubia-ckwk5:/# cat /etc/resolv.conf
 nameserver 10.96.0.10
 search default.svc.cluster.local svc.cluster.local cluster.local
 options ndots:5
+
+
+# ping service dns record dont work because service response only with "service name + service port"
+
+input:
+root@kubia-ckwk5:/# ping kubia
+
+output:
+PING kubia.default.svc.cluster.local (10.96.151.114): 56 data bytes
+^C--- kubia.default.svc.cluster.local ping statistics ---
+10 packets transmitted, 0 packets received, 100% packet loss
