@@ -27,3 +27,8 @@ kubia-7t54n   1/1     Running   0          2m6s
 kubia-kdxmr   1/1     Running   0          2m6s
 kubia-qs7b4   1/1     Running   0          2m6s
 
+input:
+kubectl exec kubia-7t54n -- curl -s http://10.96.151.114        #ClusterIP from kubia-svc
+
+output:
+You've hit kubia-qs7b4
