@@ -32,3 +32,26 @@ kubectl exec kubia-7t54n -- curl -s http://10.96.151.114        #ClusterIP from 
 
 output:
 You've hit kubia-qs7b4
+
+input:
+kubectl exec -it kubia-ckwk5 bash
+
+# service.namespace.domain_cluster_suffix
+#
+# kubia.default.svc.cluster.local
+#
+# kubia = service
+# default = namespace
+# svc.cluster.local = domain_cluster_suffix
+
+output:
+root@kubia-ckwk5:/# curl http://kubia.default.svc.cluster.local
+You've hit kubia-l98qs
+root@kubia-ckwk5:/# curl http://kubia.default
+You've hit kubia-6ffm2
+root@kubia-ckwk5:/# curl http://kubia
+You've hit kubia-l98qs
+root@kubia-ckwk5:/# cat /etc/resolv.conf
+nameserver 10.96.0.10
+search default.svc.cluster.local svc.cluster.local cluster.local
+options ndots:5
