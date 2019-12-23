@@ -19,3 +19,11 @@ output:
 replicationcontroller/kubia created
 
 input:
+kubectl get po
+
+output:
+NAME          READY   STATUS    RESTARTS   AGE
+kubia-7t54n   1/1     Running   0          2m6s
+kubia-kdxmr   1/1     Running   0          2m6s
+kubia-qs7b4   1/1     Running   0          2m6s
+
